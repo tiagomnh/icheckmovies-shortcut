@@ -1,23 +1,25 @@
+function getIdFromUrl(url) {
+    var regex = /(tt\d+)/;
+    var match = regex.exec(url);
+
+    return match != null ? match[1] : match;
+}
+
 function checkForValidUrl(tabId, changeInfo, tab) {
   if (tab.url.indexOf('imdb.com') > -1) {
 
-    var regex = /(tt(\d+))/;
-    var match = regex.exec(tab.url);
-
-    if (match != null) {
+    if (getIdFromUrl(tab.url) != null) {
         chrome.pageAction.show(tabId);
     }
   }
 };
 
 chrome.pageAction.onClicked.addListener(function(tab) {
+    var id = getIdFromUrl(tab.url)
 
-    var regex = /(tt(\d+))/;
-    var match = regex.exec(tab.url);
-
-    if (match != null) {
+    if (id != null) {
         chrome.tabs.create({
-            url: 'http://www.icheckmovies.com/search/movies/?query=' + match[1]
+            url: 'http://www.icheckmovies.com/search/movies/?query=' + id
         });
     }
 });
