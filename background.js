@@ -10,4 +10,16 @@ function checkForValidUrl(tabId, changeInfo, tab) {
   }
 };
 
+chrome.pageAction.onClicked.addListener(function(tab) {
+
+    var regex = /(tt(\d+))/;
+    var match = regex.exec(tab.url);
+
+    if (match != null) {
+        chrome.tabs.create({
+            url: 'http://www.icheckmovies.com/search/movies/?query=' + match[1]
+        });
+    }
+});
+
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
