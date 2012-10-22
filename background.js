@@ -14,7 +14,7 @@ function checkForValidUrl(tabId, changeInfo, tab) {
   }
 };
 
-chrome.pageAction.onClicked.addListener(function(tab) {
+function openPage(tab) {
     var id = getIdFromUrl(tab.url)
 
     if (id != null) {
@@ -22,6 +22,7 @@ chrome.pageAction.onClicked.addListener(function(tab) {
             url: 'http://www.icheckmovies.com/search/movies/?query=' + id
         });
     }
-});
+}
 
+chrome.pageAction.onClicked.addListener(openPage);
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
