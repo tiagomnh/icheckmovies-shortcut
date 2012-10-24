@@ -1,5 +1,5 @@
 {
-  "name": "IMDb to iCheckMovies",
+  "name": "iCheckMovies Shortcut",
   "version": "1.0",
   "description": "Open iCheckMovies page of the current IMDb page.",
   "background": { "scripts": ["background.js"] },
